@@ -14,6 +14,11 @@
                     <h5>Wydarzenia wewnętrzne</h5>
                 </div>
             </a>
+            <a href="/users">
+                <div class="card-panel hoverable center">
+                    <h5>Users</h5>
+                </div>
+            </a>
         </div>
     </div>
 </div>
