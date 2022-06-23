@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Priority extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $table = "Priorityes";
+    protected $primaryKey = "Id";
 }
