@@ -8,8 +8,11 @@
 
                 <div class="input-field col s4">
                     <i class="material-icons prefix">input</i>
-                    <input id="Title" type="text" name="Title" class="validate validator-required" required>
+                    <input id="Title" type="text" value="{{old('Title')}}" name="Title" class="validate validator-required" >
                     <label for="Title">Title</label>
+                    @error('Title')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col s12">
                     <div class="submit-field input-field">

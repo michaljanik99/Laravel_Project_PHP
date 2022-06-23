@@ -7,16 +7,22 @@
                 @csrf
                 <div class="input-field col s4">
                     <i class="material-icons prefix">input</i>
-                    <input id="Name" type="text" name="Name" class="validate validator-required" value="{{ $users -> Name}}" required>
+                    <input id="Name" type="text" name="Name" class="validate validator-required" value="{{ $users -> Name}}" >
                     <label for="Name">Name</label>
+                    @error('Name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">insert_link</i>
-                    <input id="Surname" type="text" name="Surname"class="validate" value="{{ $users -> Surname}}" required>
+                    <input id="Surname" type="text" name="Surname"class="validate" value="{{ $users -> Surname}}" >
                     <label for="Surname">Surname</label>
+                    @error('Surname')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="input-field col s12">
-                    <select id="Position" name="Position" required>
+                    <select id="Position" name="Position" >
                         @foreach($positions as $position)
                             <option value="{{$position->Id}}" @if($position->Id == $users -> PositionId ) selected @endif>{{$position->Title}}</option>
                         @endforeach
@@ -24,8 +30,11 @@
                     <label>Materialize Select</label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="Adress" class="materialize-textarea" name="Adress" placeholder="Adress"  required>{{ $users -> Adress}}</textarea>
+                    <textarea id="Adress" class="materialize-textarea" name="Adress" placeholder="Adress"  >{{ $users -> Adress}}</textarea>
                     <label for="Adress"></label>
+                    @error('Adress')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col s12">
                     <div class="submit-field input-field">

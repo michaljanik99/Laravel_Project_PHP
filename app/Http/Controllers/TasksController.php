@@ -22,6 +22,13 @@ class TasksController extends Controller
         return view("tasks.edit", ["tasks" => $tasks,'users'=>$users,'priorityes'=>$priorityes,'sprints'=>$sprints]);
     }
     public function update(Request $request, $id) {
+        $request->validate([
+            'Title' => 'required|max:256',
+            'Description' => 'required|max:256',
+            'Sprint' => 'required|integer',
+            'Priority' => 'required|integer',
+            'User' => 'required|integer',
+        ]);
         $tasks = Task::find($id);
         $tasks -> Title = $request->input('Title');
         $tasks -> Description = $request->input('Description');
@@ -52,6 +59,13 @@ class TasksController extends Controller
         return view("tasks.create",['users'=>$users,'priorityes'=>$priorityes,'sprints'=>$sprints]);
     }
     public function addToDB(Request $request) {
+        $request->validate([
+            'Title' => 'required|max:256',
+            'Description' => 'required|max:256',
+            'Sprint' => 'required',
+            'Priority' => 'required',
+            'User' => 'required',
+        ]);
         $tasks= new Task();
         $tasks -> Title = $request->input('Title');
         $tasks -> Description = $request->input('Description');

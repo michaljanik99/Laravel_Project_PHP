@@ -14,6 +14,9 @@ class PositionsController extends Controller
         return view("positions.edit", ["positions" => $positions]);
     }
     public function update(Request $request, $id) {
+        $request->validate([
+            'Title' => 'required|max:64',
+        ]);
         $positions = Position::find($id);
         $positions -> Title = $request->input('Title');
         $positions -> save();
@@ -34,6 +37,9 @@ class PositionsController extends Controller
         return view("positions.create");
     }
     public function addToDB(Request $request) {
+        $request->validate([
+            'Title' => 'required|max:64',
+        ]);
         $positions= new Position();
         $positions -> Title = $request->input('Title');
         $positions -> save();

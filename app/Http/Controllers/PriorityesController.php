@@ -15,6 +15,9 @@ class PriorityesController extends Controller
         return view("priorityes.edit", ["priorityes" => $priorityes]);
     }
     public function update(Request $request, $id) {
+        $request->validate([
+            'Title' => 'required|max:64',
+        ]);
         $priorityes = Priority::find($id);
         $priorityes -> Title = $request->input('Title');
         $priorityes -> save();
@@ -35,6 +38,9 @@ class PriorityesController extends Controller
         return view("priorityes.create");
     }
     public function addToDB(Request $request) {
+        $request->validate([
+            'Title' => 'required|max:64',
+        ]);
         $priorityes= new Priority();
         $priorityes -> Title = $request->input('Title');
         $priorityes -> save();

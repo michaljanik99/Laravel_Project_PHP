@@ -19,6 +19,14 @@ class SprintsController extends Controller
         return view("sprints.edit", ["sprints" => $sprints,'users'=>$users]);
     }
     public function update(Request $request, $id) {
+        $request->validate([
+            'Title' => 'required|max:256',
+            'StartDate' => 'required|date',
+            'StartTime' => 'required|date_format:H:i',
+            'EndDate' => 'required|date|after:StartDate',
+            'EndTime' => 'required|date_format:H:i|after:StartTime',
+            'User' => 'required|integer',
+        ]);
         $sprints = Sprint::find($id);
         $sprints -> Title = $request->input('Title');
         $sprints -> StartDateTime = date("Y-m-d G:i:s",strtotime($request->input('StartDate')." ".$request->input('StartTime')));
@@ -43,9 +51,15 @@ class SprintsController extends Controller
         return view("sprints.create",['users'=>$users]);
     }
     public function addToDB(Request $request) {
-
-        $time_input = strtotime($request->input('StartDate')." ".$request->input('StartTime'));
         $sprints= new Sprint();
+        $request->validate([
+            'Title' => 'required|max:256',
+            'StartDate' => 'required|date',
+            'StartTime' => 'required|date_format:H:i',
+            'EndDate' => 'required|date|after:StartDate',
+            'EndTime' => 'required|date_format:H:i|after:StartTime',
+            'User' => 'required|integer',
+        ]);
         $sprints -> Title = $request->input('Title');
         $sprints -> CreationDateTime = date("Y-m-d G:i:s");
         $sprints -> StartDateTime = date("Y-m-d G:i:s",strtotime($request->input('StartDate')." ".$request->input('StartTime')));

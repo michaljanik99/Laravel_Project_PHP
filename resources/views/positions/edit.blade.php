@@ -7,8 +7,11 @@
                 @csrf
                 <div class="input-field col s4">
                     <i class="material-icons prefix">input</i>
-                    <input id="nazwa" type="text" name="Title" value="{{ $positions  -> Title}}" class="validate" required>
-                    <label for="nazwa">Nazwa</label>
+                    <input id="Title" type="text" name="Title" value="{{ $positions  -> Title}}" class="validate">
+                    <label for="Title">Title</label>
+                    @error('Title')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col s12">
                     <div class="submit-field input-field">

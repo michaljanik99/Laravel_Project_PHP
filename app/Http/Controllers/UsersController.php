@@ -18,6 +18,12 @@ class UsersController extends Controller
         return view("users.edit", ["users" => $users,"positions"=>$positions]);
     }
     public function update(Request $request, $id) {
+        $request->validate([
+            'Name' => 'required|max:64',
+            'Surname' => 'required|max:64',
+            'Position' => 'required|integer',
+            'Adress' => 'required|max:256',
+        ]);
         $users = User::find($id);
         $users -> Name = $request->input('Name');
         $users -> Surname = $request->input('Surname');
@@ -45,6 +51,13 @@ class UsersController extends Controller
         return view("users.create",['positions'=>$positions]);
     }
     public function addToDB(Request $request) {
+        $request->validate([
+            'Name' => 'required|max:64',
+            'Surname' => 'required|max:64',
+            'Position' => 'required|integer',
+            'Adress' => 'required|max:256',
+        ]);
+
         $users= new User();
         $users -> Name = $request->input('Name');
         $users -> Surname = $request->input('Surname');

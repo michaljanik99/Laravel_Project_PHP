@@ -9,15 +9,6 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <h1>{{$title ?? "Strona laravel"    }}</h1>
-            </div>
-        </div>
-        <div class="row">
-        </div>
-    </div>
 
      @yield('menu')
 
