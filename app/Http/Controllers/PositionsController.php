@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Position;
 use Illuminate\Http\Request;
-
 class PositionsController extends Controller
 {
     public function index()
@@ -14,7 +12,6 @@ class PositionsController extends Controller
     public function edit($id) {
         $positions = Position::find($id);
         return view("positions.edit", ["positions" => $positions]);
-
     }
     public function update(Request $request, $id) {
         $positions = Position::find($id);
@@ -27,6 +24,11 @@ class PositionsController extends Controller
         $positions -> IsActive = false;
         $positions -> save();
         return redirect("/positions");
+    }
+    public function search(Request $request){
+        $search = $request->input('search');
+        $positions = Position::where("IsActive", "=", true)->where('Positions.Title', 'LIKE', "%{$search}%")->get();
+        return view('/positions/search', compact('positions'));
     }
     public function create() {
         return view("positions.create");
