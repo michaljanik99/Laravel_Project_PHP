@@ -18,7 +18,12 @@
 @endsection
 
 @section('content')
+
     <div class="container">
+        <form action="/positions/search" method="GET">
+            <input type="text" name="search" required/>
+            <button type="submit">Search</button>
+        </form>
         <div class="row">
 
             @foreach($positions as $position)

@@ -1,4 +1,5 @@
 @extends('main', ['title' => 'Users'])
+
 @section('menu')
     <div class="container">
         <div class="row">
@@ -15,13 +16,17 @@
 @endsection
 @section('content')
     <div class="container">
+        <form action="/users/search" method="GET">
+            <input type="text" name="search" required/>
+            <button type="submit">Search</button>
+        </form>
         <div class="row">
             @foreach($users as $user)
                 <div class="col s12 m4 l3">
                     <div class="card">
                         <div class="card-content">
                             <span class="card-title">{{ $user->Name }} {{ $user->Surname }} </span>
-                            <blockquote>Position: {{ $user->Position }}</blockquote>
+                            <blockquote>Position: {{ $user->PositionTitle }}</blockquote>
                             <blockquote>Adress: {{ $user->Adress }}</blockquote>
                         </div>
                         <div class="card-action">

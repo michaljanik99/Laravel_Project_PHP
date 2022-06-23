@@ -28,9 +28,19 @@
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script type="text/javascript" src="/js/validator.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var elems = document.querySelectorAll("select");
-            var instances = M.FormSelect.init(elems, {});
+        document.addEventListener("DOMContentLoaded", () =>{
+            const selects = document.querySelectorAll("select");
+            const datePickers = document.querySelectorAll('.datepicker');
+            const timePickers = document.querySelectorAll('.timepicker');
+            const selectsEl = M.FormSelect.init(selects);
+            const timePickersEl = M.Timepicker.init(timePickers,{
+                twelveHour: false,
+                defaultTime: 'now',
+            });
+            const datePickersEl = M.Datepicker.init(datePickers,{
+                defaultDate: new Date(),
+                setDefaultDate: true,
+            });
         });
     </script>
 </body>
