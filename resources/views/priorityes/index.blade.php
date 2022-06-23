@@ -1,31 +1,22 @@
-@extends('main', ['title' => 'Priorityes'])
-
-@section('menu')
-
-    <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <a href="/" class="btn waves-effect waves-light">Home
-                    <i class="material-icons right">home</i>
-                </a>
-                <a href="/priorityes/new" class="btn waves-effect waves-light">New Priorityes
-                    <i class="material-icons right">add</i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-@endsection
-
+@extends('main', ['title' => 'All Priorityes'])
 @section('content')
-
     <div class="container">
-        <form action="/priorityes/search" method="GET">
-            <input type="text" name="search" required/>
-            <button type="submit">Search</button>
+        <form action="/priorityes/search" method="GET" style="padding: 20px">
+            <div class="row valign-wrapper">
+                <div class="col s10">
+                    <input type="text" name="search" required/>
+                </div>
+                <div class="col s2">
+                    <button class="btn waves-effect waves-light blue accent-2" type="submit">Search<i
+                            class="material-icons right">search</i></button>
+                </div>
+            </div>
         </form>
+        <div class="row valign-wrapper center-align">
+            <a class="btn-floating btn-large waves-effect waves-light blue accent-2" href="/priorityes/new"><i
+                    class="material-icons">add</i></a>
+        </div>
         <div class="row">
-
             @foreach($priorityes as $priority)
                 <div class="col s12 m4 l3">
                     <div class="card">
@@ -34,7 +25,7 @@
                         </div>
                         <div class="card-action">
                             <form method="post">
-                                <a href="{{ url() -> current() }}/edit/{{ $priority -> Id }}" class="btn-floating btn-small waves-effect waves-teal">
+                                <a href="{{ url() -> current() }}/edit/{{ $priority -> Id }}" class="btn-floating btn-small waves-effect waves-teal blue accent-2">
                                     <i class="material-icons">edit</i></a>
                                 <a href="{{ url() -> current() }}/delete/{{ $priority -> Id }}" class="btn-floating btn-small waves-effect waves-teal red">
                                     <i class="material-icons">delete</i></a>

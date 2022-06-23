@@ -1,35 +1,11 @@
-@extends('main', ['title' => 'Zadanie Laravel Michał Janik'])
+@extends('main', ['title' => 'Home'])
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col s12 m4 l3">
-            <a href="/users">
-                <div class="card-panel hoverable center">
-                    <h5>Users</h5>
-                </div>
-            </a>
-            <a href="/priorityes">
-                <div class="card-panel hoverable center">
-                    <h5>Priorityes</h5>
-                </div>
-            </a>
-            <a href="/sprints">
-                <div class="card-panel hoverable center">
-                    <h5>Sprints</h5>
-                </div>
-            </a>
-            <a href="/tasks">
-                <div class="card-panel hoverable center">
-                    <h5>Tasks</h5>
-                </div>
-            </a>
-            <a href="/positions">
-                <div class="card-panel hoverable center">
-                    <h5>Positions</h5>
-                </div>
-            </a>
-        </div>
+<div class="container" style="min-height: 550px">
+    <div class="row center-align">
+        <h1>Welcome to the task management programm</h1>
+        <p class="flow-text center-align">It will help you organise your tasks in order to rise to the heights of your productivity </p>
+        <a href="/tasks" style="margin-top: 60px" class="waves-effect waves-light btn btn blue accent-2">Let's start</a>
     </div>
 </div>
 @endsection

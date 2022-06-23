@@ -44,7 +44,7 @@ class UsersController extends Controller
             $query->where('Users.Name', 'LIKE', "%$search%");
             $query->orWhere('Users.Surname', 'LIKE', "%$search%");
         })->get(['Users.*', 'Positions.Title AS PositionTitle']);
-        return view('/users/search', compact('users'));
+        return view('/users/search', ['users'=>$users,'search'=>$search]);
     }
     public function create() {
         $positions = Position::where("IsActive", "=", true) -> get();

@@ -1,25 +1,31 @@
-@extends('main', ['title' => 'Posty wewnętrzne edytuj'])
+@extends('main', ['title' => 'Edit Task'])
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row" style="padding-top: 20px">
             <form class="col s12" method="post" action="/tasks/update/{{ $tasks -> Id }}">
                 @csrf
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">input</i>
+                <div class="input-field col s12">
                     <input id="Title" type="text" name="Title" value="{{ $tasks -> Title }}" class="validate validator-required" >
                     <label for="Title">Title</label>
                     @error('Title')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">insert_link</i>
+                <div class="input-field col s12">
                     <input id="Description" type="text" value="{{ $tasks -> Description }}" name="Description"class="validate" >
                     <label for="lDescriptionink">Description</label>
                     @error('Description')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                </div>
+                <div class="input-field col s12">
+                    <select id="Status" name="Status" >
+                        @foreach($status as $status)
+                            <option value="{{$status}}" @if($status == $tasks -> Status  ) selected @endif>{{$status}}</option>
+                        @endforeach
+                    </select>
+                    <label>Status</label>
                 </div>
                 <div class="input-field col s12">
                     <select id="User" name="User" >
@@ -45,18 +51,11 @@
                     </select>
                     <label>Sprint</label>
                 </div>
-                <div class="input-field col s12">
-                    <select id="Status" name="Status" >
-                        @foreach($status as $status)
-                            <option value="{{$status}}" @if($status == $tasks -> Status  ) selected @endif>{{$status}}</option>
-                        @endforeach
-                    </select>
-                    <label>Sprint</label>
-                </div>
 
                 <div class="col s12">
                     <div class="submit-field input-field">
-                        <button class="btn waves-effect waves-light" type="submit">Edytuj
+                        <a href="../" class="waves-effect waves-light btn blue accent-2">Return</a>
+                        <button class="btn waves-effect waves-light btn blue accent-2" type="submit">Edit
                             <i class="material-icons right">edit</i>
                         </button>
                     </div>

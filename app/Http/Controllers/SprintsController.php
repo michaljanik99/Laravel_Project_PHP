@@ -22,9 +22,9 @@ class SprintsController extends Controller
         $request->validate([
             'Title' => 'required|max:256',
             'StartDate' => 'required|date',
-            'StartTime' => 'required|date_format:H:i',
+            'StartTime' => 'required|date_format:H:i:s',
             'EndDate' => 'required|date|after:StartDate',
-            'EndTime' => 'required|date_format:H:i|after:StartTime',
+            'EndTime' => 'required|date_format:H:i:s|after:StartTime',
             'User' => 'required|integer',
         ]);
         $sprints = Sprint::find($id);
@@ -44,7 +44,7 @@ class SprintsController extends Controller
     public function search(Request $request){
         $search = $request->input('search');
         $sprints = Sprint::leftJoin('Users', 'Users.Id', '=', 'Sprints.CreatedById')->where("Sprints.IsActive", "=", true)->where('Sprints.Title', 'LIKE', "%{$search}%")->get(['Sprints.*', 'Users.Name AS UsersName','Users.Surname AS UsersSurname']);
-        return view('/sprints/search', compact('sprints'));
+        return view('/sprints/search', ['sprints'=>$sprints,'search'=>$search]);
     }
     public function create() {
         $users = User::where("IsActive", "=", true) -> get();
@@ -55,9 +55,9 @@ class SprintsController extends Controller
         $request->validate([
             'Title' => 'required|max:256',
             'StartDate' => 'required|date',
-            'StartTime' => 'required|date_format:H:i',
+            'StartTime' => 'required|date_format:H:i:s',
             'EndDate' => 'required|date|after:StartDate',
-            'EndTime' => 'required|date_format:H:i|after:StartTime',
+            'EndTime' => 'required|date_format:H:i:s|after:StartTime',
             'User' => 'required|integer',
         ]);
         $sprints -> Title = $request->input('Title');

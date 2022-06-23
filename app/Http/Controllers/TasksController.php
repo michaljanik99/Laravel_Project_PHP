@@ -47,7 +47,7 @@ class TasksController extends Controller
             $query->where('Tasks.Title', 'LIKE', "%$search%");
             $query->orWhere('Tasks.Description', 'LIKE', "%$search%");
         })->get(['Tasks.*', 'Users.Name AS UsersName','Users.Surname AS UsersSurname','Priorityes.Title As PriorityTitle','Sprints.Title As SprintTitle','Sprints.StartDateTime As SprintStart','Sprints.EndDateTime As SprintEnd']);
-        return view('/tasks/search', compact('tasks'));
+        return view('/tasks/search', ['tasks'=>$tasks,'search'=>$search]);
     }
     public function delete($id) {
         $tasks = Task::find($id);

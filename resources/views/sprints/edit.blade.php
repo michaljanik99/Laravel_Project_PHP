@@ -1,8 +1,8 @@
-@extends('main', ['title' => 'Posty wewnętrzne edytuj'])
+@extends('main', ['title' => 'Edit Sprint'])
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row" style="padding: 20px">
             <form class="col s12" method="post" action="/sprints/update/{{ $sprints -> Id }}">
                 @csrf
                 <div class="row">
@@ -15,7 +15,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div>Start time</div>
                     <div class="input-field col s6">
                         <input value="{{ date('m-d-y', strtotime($sprints -> StartDateTime)) }}" id="StartDate" name="StartDate" type="text" class="datepicker">
                         <label for="StartDate">StartDate</label>
@@ -33,7 +32,7 @@
 
                 </div>
                 <div class="row">
-                    <div>End time</div>
+
                     <div class="input-field col s6">
                         <input value="{{ date('m-d-y', strtotime($sprints -> EndDateTime)) }}" id="EndDate" name="EndDate" type="text" class="datepicker">
                         <label for="EndDate">EndDate</label>
@@ -49,6 +48,7 @@
                         @enderror
                     </div>
                 </div>
+                <div class="row">
                 <div class="input-field col s12">
                     <select id="User" name="User" >
                         @foreach($users as $user)
@@ -60,13 +60,16 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
+                </div>
+                <div class="row">
                 <div class="col s12">
                     <div class="submit-field input-field">
-                        <button class="btn waves-effect waves-light" type="submit">Edytuj
+                        <a href="../" class="waves-effect waves-light btn blue accent-2">Return</a>
+                        <button class="btn waves-effect waves-light btn blue accent-2" type="submit">Edit
                             <i class="material-icons right">edit</i>
                         </button>
                     </div>
+                </div>
                 </div>
             </form>
         </div>
