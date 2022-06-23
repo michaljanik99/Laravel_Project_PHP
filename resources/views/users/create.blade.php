@@ -16,8 +16,13 @@
                     <label for="Surname">Surname</label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="Position" class="materialize-textarea" name="Position" placeholder="Position" required></textarea>
-                    <label for="Position"></label>
+                    <select id="Position" name="Position" required>
+                        <option value="" disabled selected>Choose your option</option>
+                        @foreach($positions as $position)
+                        <option value="{{$position->Id}}">{{$position->Title}}</option>
+                        @endforeach
+                    </select>
+                    <label>Materialize Select</label>
                 </div>
                 <div class="input-field col s12">
                     <textarea id="Adress" class="materialize-textarea" name="Adress" placeholder="Adress" required></textarea>
