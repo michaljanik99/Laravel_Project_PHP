@@ -3,37 +3,45 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form class="col s12" method="post" action="/posty-wewnetrzne/aktualizacja/{{ $posts -> Id }}">
+            <form class="col s12" method="post" action="/sprints/update/{{ $sprints -> Id }}">
                 @csrf
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">input</i>
-                    <input id="nazwa" type="text" name="Title" value="{{ $posts -> Title}}" class="validate" required>
-                    <label for="nazwa">Nazwa</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Title" type="text" value="{{ $sprints -> Title }}" name="Title" class="validate validator-required" required>
+                        <label for="Title">Tytuł</label>
+                    </div>
                 </div>
-                <div class="input-field col s4">
-                    <i class="material-icons prefix">insert_link</i>
-                    <input id="link" type="text" name="Link" value="{{ $posts -> Link}}" class="validate" required>
-                    <label for="link">Link</label>
+                <div class="row">
+                    <div>Start time</div>
+                    <div class="input-field col s6">
+                        <input value="{{ date('m-d-y', strtotime($sprints -> StartDateTime)) }}" id="StartDate" name="StartDate" type="text" class="datepicker">
+                        <label for="StartDate">StartDate</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input value="{{ date('H:i:s', strtotime($sprints -> StartDateTime)) }}" id="StartTime" name="StartTime" type="text" class="timepicker">
+                        <label for="StartTime">StartTime</label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div>End time</div>
+                    <div class="input-field col s6">
+                        <input value="{{ date('m-d-y', strtotime($sprints -> EndDateTime)) }}" id="EndDate" name="EndDate" type="text" class="datepicker">
+                        <label for="EndDate">EndDate</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input value="{{ date('H:i:s', strtotime($sprints -> EndDateTime)) }}" id="EndTime" name="EndTime" type="text" class="timepicker">
+                        <label for="EndTime">EndTime</label>
+                    </div>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" name="ShortDescription" required>{{ $posts -> ShortDescription}}</textarea>
-                    <label for="textarea1">Krótki opis</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="ContentHTML" required>{{ $posts -> ContentHTML}}</textarea>
-                    <label for="textarea2">Kontent HTML</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" name="MetaDescription" required>{{ $posts -> MetaDescription}}</textarea>
-                    <label for="textarea1">Opis meta</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="MetaTags" required>{{ $posts -> MetaTags}}</textarea>
-                    <label for="textarea2">Tagi meta</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="Notes" required>{{ $posts -> Notes}}</textarea>
-                    <label for="textarea2">Notatki</label>
+                    <select id="User" name="User" required>
+                        <option value="" disabled selected>Choose your users</option>
+                        @foreach($users as $user)
+                            <option value="{{$user->Id}}" @if($user->Id == $sprints -> UsersId ) selected @endif>{{$user->Name}} {{$user->Surname}}</option>
+                        @endforeach
+                    </select>
+                    <label>User</label>
                 </div>
 
                 <div class="col s12">

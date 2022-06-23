@@ -7,7 +7,7 @@
                 @csrf
                 <div class="input-field col s4">
                     <i class="material-icons prefix">input</i>
-                    <input id="nazwa" type="text" name="Title" value="{{ $positions -> Title}}" class="validate" required>
+                    <input id="nazwa" type="text" name="Title" value="{{ $positions  -> Title}}" class="validate" required>
                     <label for="nazwa">Nazwa</label>
                 </div>
                 <div class="col s12">

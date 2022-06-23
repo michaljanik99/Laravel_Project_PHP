@@ -3,37 +3,44 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form class="col s12" method="post" action="/posty-wewnetrzne/aktualizacja/{{ $posts -> Id }}">
+            <form class="col s12" method="post" action="/tasks/update/{{ $tasks -> Id }}">
                 @csrf
                 <div class="input-field col s4">
                     <i class="material-icons prefix">input</i>
-                    <input id="nazwa" type="text" name="Title" value="{{ $posts -> Title}}" class="validate" required>
-                    <label for="nazwa">Nazwa</label>
+                    <input id="Title" type="text" name="Title" value="{{ $tasks -> Title }}" class="validate validator-required" required>
+                    <label for="Title">Title</label>
                 </div>
                 <div class="input-field col s4">
                     <i class="material-icons prefix">insert_link</i>
-                    <input id="link" type="text" name="Link" value="{{ $posts -> Link}}" class="validate" required>
-                    <label for="link">Link</label>
+                    <input id="Description" type="text" value="{{ $tasks -> Description }}" name="Description"class="validate" required>
+                    <label for="lDescriptionink">Description</label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" name="ShortDescription" required>{{ $posts -> ShortDescription}}</textarea>
-                    <label for="textarea1">Krótki opis</label>
+                    <select id="User" name="User" required>
+                        <option value="" disabled selected>Choose your users</option>
+                        @foreach($users as $user)
+                            <option value="{{$user->Id}}" @if($user->Id == $tasks -> UserId ) selected @endif>{{$user->Name}} {{$user->Surname}}</option>
+                        @endforeach
+                    </select>
+                    <label>User</label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="ContentHTML" required>{{ $posts -> ContentHTML}}</textarea>
-                    <label for="textarea2">Kontent HTML</label>
+                    <select id="Priority" name="Priority" required>
+                        <option value="" disabled selected>Choose your users</option>
+                        @foreach($priorityes as $priority)
+                            <option value="{{$priority->Id}}" @if($priority->Id == $tasks -> PriorityId ) selected @endif>{{$priority->Title}}</option>
+                        @endforeach
+                    </select>
+                    <label>Priority</label>
                 </div>
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" name="MetaDescription" required>{{ $posts -> MetaDescription}}</textarea>
-                    <label for="textarea1">Opis meta</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="MetaTags" required>{{ $posts -> MetaTags}}</textarea>
-                    <label for="textarea2">Tagi meta</label>
-                </div>
-                <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" name="Notes" required>{{ $posts -> Notes}}</textarea>
-                    <label for="textarea2">Notatki</label>
+                    <select id="Sprint" name="Sprint" required>
+                        <option value="" disabled selected>Choose your users</option>
+                        @foreach($sprints as $sprint)
+                            <option value="{{$sprint->Id}}" @if($sprint->Id == $tasks -> SprintId  ) selected @endif>{{$sprint->Title}}</option>
+                        @endforeach
+                    </select>
+                    <label>Sprint</label>
                 </div>
 
                 <div class="col s12">
