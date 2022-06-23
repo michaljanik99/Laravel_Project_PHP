@@ -14,9 +14,9 @@
                             </div>
                             <div class="card-action">
                                 <form method="post">
-                                    <a href="{{ url() -> current() }}/edit/{{ $user -> Id }}" class="btn-floating btn-small waves-effect waves-teal">
+                                    <a href="../users/edit/{{ $user -> Id }}" class="btn-floating btn-small waves-effect waves-teal">
                                         <i class="material-icons">edit</i></a>
-                                    <a href="{{ url() -> current() }}/delete/{{ $user -> Id }}" class="btn-floating btn-small waves-effect waves-teal red">
+                                    <a href="../users/delete/{{ $user -> Id }}" class="btn-floating btn-small waves-effect waves-teal red">
                                         <i class="material-icons">delete</i></a>
                                 </form>
                             </div>

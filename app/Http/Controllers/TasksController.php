@@ -33,7 +33,10 @@ class TasksController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
-        $tasks = Task::leftJoin('Users', 'Users.Id', '=', 'Tasks.UserId')->leftJoin('Priorityes', 'Priorityes.Id', '=', 'Tasks.PriorityId')->leftJoin('Sprints', 'Sprints.Id', '=', 'Tasks.SprintId')->where("Tasks.IsActive", "=", true)->where('Tasks.Title', 'LIKE', "%{$search}%")->orWhere('Tasks.Description', 'LIKE', "%{$search}%")->get(['Tasks.*', 'Users.Name AS UsersName','Users.Surname AS UsersSurname','Priorityes.Title As PriorityTitle','Sprints.Title As SprintTitle','Sprints.StartDateTime As SprintStart','Sprints.EndDateTime As SprintEnd']);
+        $tasks = Task::leftJoin('Users', 'Users.Id', '=', 'Tasks.UserId')->leftJoin('Priorityes', 'Priorityes.Id', '=', 'Tasks.PriorityId')->leftJoin('Sprints', 'Sprints.Id', '=', 'Tasks.SprintId')->where("Tasks.IsActive", "=", true)->where(function($query) use ($search){
+            $query->where('Tasks.Title', 'LIKE', "%$search%");
+            $query->orWhere('Tasks.Description', 'LIKE', "%$search%");
+        })->get(['Tasks.*', 'Users.Name AS UsersName','Users.Surname AS UsersSurname','Priorityes.Title As PriorityTitle','Sprints.Title As SprintTitle','Sprints.StartDateTime As SprintStart','Sprints.EndDateTime As SprintEnd']);
         return view('/tasks/search', compact('tasks'));
     }
     public function delete($id) {

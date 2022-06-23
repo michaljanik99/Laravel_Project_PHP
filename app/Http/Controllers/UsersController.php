@@ -34,7 +34,10 @@ class UsersController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
-        $users = User::leftJoin('Positions', 'Users.PositionId', '=', 'Positions.Id')->where("Users.IsActive", "=", true)->where('Users.Name', 'LIKE', "%{$search}%")->orWhere('Users.Surname', 'LIKE', "%{$search}%")->get(['Users.*', 'Positions.Title AS PositionTitle']);
+        $users = User::rightJoin('Positions', 'Users.PositionId', '=', 'Positions.Id')->where("Users.IsActive", "=", true)->where(function($query) use ($search){
+            $query->where('Users.Name', 'LIKE', "%$search%");
+            $query->orWhere('Users.Surname', 'LIKE', "%$search%");
+        })->get(['Users.*', 'Positions.Title AS PositionTitle']);
         return view('/users/search', compact('users'));
     }
     public function create() {
