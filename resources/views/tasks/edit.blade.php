@@ -45,6 +45,14 @@
                     </select>
                     <label>Sprint</label>
                 </div>
+                <div class="input-field col s12">
+                    <select id="Status" name="Status" >
+                        @foreach($status as $status)
+                            <option value="{{$status}}" @if($status == $tasks -> Status  ) selected @endif>{{$status}}</option>
+                        @endforeach
+                    </select>
+                    <label>Sprint</label>
+                </div>
 
                 <div class="col s12">
                     <div class="submit-field input-field">

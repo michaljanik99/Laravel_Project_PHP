@@ -15,17 +15,19 @@ class TasksController extends Controller
         return view("tasks.index", ["tasks" => $tasks]);
     }
     public function edit($id) {
+        $status = ["To Do","In Progress","Blocked","Done"];
         $users = User::where("IsActive", "=", true) -> get();
         $priorityes = Priority::where("IsActive", "=", true) -> get();
         $sprints = Sprint::where("IsActive", "=", true) -> get();
         $tasks = Task::leftJoin('Users', 'Users.Id', '=', 'Tasks.UserId')->leftJoin('Priorityes', 'Priorityes.Id', '=', 'Tasks.PriorityId')->leftJoin('Sprints', 'Sprints.Id', '=', 'Tasks.SprintId')->where("Tasks.Id", "=", $id)->get(['Tasks.*', 'Users.Name AS UsersName','Users.Surname AS UsersSurname','Priorityes.Title As PriorityTitle','Sprints.Title As SprintTitle','Sprints.StartDateTime As SprintStart','Sprints.EndDateTime As SprintEnd'])->first();
-        return view("tasks.edit", ["tasks" => $tasks,'users'=>$users,'priorityes'=>$priorityes,'sprints'=>$sprints]);
+        return view("tasks.edit", ["tasks" => $tasks,'users'=>$users,'priorityes'=>$priorityes,'sprints'=>$sprints,'status'=>$status]);
     }
     public function update(Request $request, $id) {
         $request->validate([
             'Title' => 'required|max:256',
             'Description' => 'required|max:256',
             'Sprint' => 'required|integer',
+            'Status' => 'required|max:64',
             'Priority' => 'required|integer',
             'User' => 'required|integer',
         ]);
@@ -34,6 +36,7 @@ class TasksController extends Controller
         $tasks -> Description = $request->input('Description');
         $tasks -> SprintId  = $request->input('Sprint');
         $tasks -> PriorityId  = $request->input('Priority');
+        $tasks -> Status  = $request->input('Status');
         $tasks -> UserId  = $request->input('User');
         $tasks -> save();
         return redirect("/tasks");
