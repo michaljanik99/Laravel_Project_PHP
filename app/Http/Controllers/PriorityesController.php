@@ -31,6 +31,9 @@ class PriorityesController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
+        $request->validate([
+            'search' => 'required',
+        ]);
         $priorityes = Priority::where("IsActive", "=", true)->where('Title', 'LIKE', "%{$search}%")->get();
         return view('/priorityes/search', ['priorityes'=>$priorityes,'search'=>$search]);
     }

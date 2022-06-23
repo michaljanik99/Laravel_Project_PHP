@@ -43,6 +43,9 @@ class TasksController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
+        $request->validate([
+            'search' => 'required',
+        ]);
         $tasks = Task::leftJoin('Users', 'Users.Id', '=', 'Tasks.UserId')->leftJoin('Priorityes', 'Priorityes.Id', '=', 'Tasks.PriorityId')->leftJoin('Sprints', 'Sprints.Id', '=', 'Tasks.SprintId')->where("Tasks.IsActive", "=", true)->where(function($query) use ($search){
             $query->where('Tasks.Title', 'LIKE', "%$search%");
             $query->orWhere('Tasks.Description', 'LIKE', "%$search%");

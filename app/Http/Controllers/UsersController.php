@@ -40,6 +40,9 @@ class UsersController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
+        $request->validate([
+            'search' => 'required',
+        ]);
         $users = User::rightJoin('Positions', 'Users.PositionId', '=', 'Positions.Id')->where("Users.IsActive", "=", true)->where(function($query) use ($search){
             $query->where('Users.Name', 'LIKE', "%$search%");
             $query->orWhere('Users.Surname', 'LIKE', "%$search%");

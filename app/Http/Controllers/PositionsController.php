@@ -30,6 +30,9 @@ class PositionsController extends Controller
     }
     public function search(Request $request){
         $search = $request->input('search');
+        $request->validate([
+            'search' => 'required',
+        ]);
         $positions = Position::where("IsActive", "=", true)->where('Positions.Title', 'LIKE', "%{$search}%")->get();
         return view('/positions/search', ['positions'=>$positions,'search'=>$search]);
     }

@@ -5,7 +5,7 @@
         <form action="/positions/search" method="GET" style="padding: 20px">
             <div class="row valign-wrapper">
                 <div class="col s10">
-                    <input type="text" name="search" required/>
+                    <input type="text" name="search"/>
                 </div>
                 <div class="col s2">
                     <button class="btn waves-effect waves-light blue accent-2" type="submit">Search<i
